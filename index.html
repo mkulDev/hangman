@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <script src="./handlebars.min.js"></script>
+    <script id='templateKey' type='text/x-handlebars-template'>
+        {{#each keys}}
+        {{#if this.br}}
+     <div id="{{this.id}}" class="key" data-key="{{this.id}}">
+        <span class="singleKey">{{this.name}}</span>
+     </div> 
+     <br>
+     {{else}}
+     <div id="{{this.id}}" class="key">
+        <span class="singleKey">{{this.name}}</span>
+     </div> 
+     {{/if}}
+     {{/each}}
+    </script>
+    <title>Hangman by mkul</title>
+</head>
+<body>
+    <main>
+        <div id="container">
+            <div id= "hangman">
+                <img id= 'hangmanSRC' src="./resourcess/images/intro2.jpg">
+            </div>
+            <div id= 'right'>                
+                <div class="header">
+                <h2> Hangman words</h2>
+                <h4 class="tag">by mkul</h4>
+                </div>
+                <div id="play-button">
+                <span class="text-button">PLAY</span>
+                </div>
+            </div>      
+
+
+            <div id="right2">
+                <span>try to guess the password: </span>
+                <br>
+                <span id="password"></span>
+                <div id="keyboard">
+                </div>
+                <span id="status"></span>
+                <div id="playAgain">
+                    <p class="text-button">PLAY AGAIN</p></Play>
+                </div>
+            </div>
+
+            
+       
+    </main>
+    <script type="text/javascript" src="main.js"></script>
+    <audio id="failsound" src="./resourcess/sound/fail.mp3" ></audio>
+</body>
+</html>

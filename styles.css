@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'gadugi';
+    src: url(./resourcess/fonts/gadugi.ttf);
+  }
+
+html {
+    font-size: 18px;
+    font-family: 'gadugi';
+    color:rgb(255, 255, 255);
+    margin: 0px 0px;
+}
+
+body {
+    background-color: #002851;
+}
+
+#container {
+    margin: 10% auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+#hangman {      
+   
+}
+#right {     
+    
+}
+
+#right2 {     
+    display: none;
+}
+
+
+h2 {
+    margin-top: 200px;
+    font-size: 3em;
+    line-height: 0%;
+    font-weight: bold;    
+}
+
+h4 {
+    font-size: 1em;
+    text-align: right;
+}
+
+#play-button {
+    
+    width: 120px;    
+    height: 50px;   
+    border-radius: 5px;
+    border: 1px solid rgb(226, 226, 226);
+    cursor: pointer;
+    
+   
+}
+
+#play-button:hover{
+    background-color: rgb(255, 255, 255,0.5);       
+}
+
+.text-button{   
+    margin: auto;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+    
+}
+#password {
+    margin-top: 150px;
+    font-size: 4em;
+}
+
+.key {
+    width:40px;
+    height: 40px;
+    margin: 2px;
+    padding: 5px;
+    background-color: rgb(230, 2300, 230,0);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    display: inline-block;
+}
+
+.singleKey {
+    font-size: 24px;
+}
+
+#keyboard{
+    margin-top: 50px;
+    text-align: center;
+}
+
+#playAgain {
+    margin-top: 50px;
+    display: none;
+    width:220px;
+    height: 50px;    
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    cursor: pointer;
+}

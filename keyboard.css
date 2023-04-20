@@ -1,0 +1,16 @@
+.key {
+    margin: 2px;
+    padding: 5px;
+    background-color: rgb(230, 2300, 230,0);
+    color: black;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.singleKey {
+    font-size: 24px;
+}
+
+#keyboard{
+    text-align: center;
+}
