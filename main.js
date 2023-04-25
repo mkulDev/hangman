@@ -1,183 +1,120 @@
-let startButton = document.getElementById('play-button')
-let rightColumn = document.getElementById('right')
-let right2Column = document.getElementById('right2')
-let hangmanIcon = document.getElementById('hangmanSRC')
-let hint = document.getElementById('hint')
-let passwordPlace = document.getElementById('password')
-let buttonAgain = document.getElementById('playAgain')
+import {answears, letters, hangmanIcon, welcomeScreen, playBtn, playAgainBtn, playground, passwordHolder, keyboard, statusHolder, sound} from './constants.js'
+
 let failCounter = 0
+let gameResolved = false
+// changing welcome screnn to playground
+function switchScreen(element) {
+  element?.classList.contains('active') ? element?.classList.replace('active', 'hidden') : element?.classList.replace('hidden', 'active')
+}
+
+playBtn.addEventListener('click', () => {
+  imgSwitch()
+  switchScreen(welcomeScreen)
+  switchScreen(playground)
+})
+
+// create a password
+let answear = []
 let password = []
-let passwordText = 'PARIS'
-const Answers = [
-  'AMSTERDAM',
-  'ANDORA',
-  'ATHENS',
-  'BELGRADE',
-  'BERN',
-  'BRATISLAVA',
-  'BERLIN',
-  'Copenhagen',
-  'Dublin',
-  'Helsinki',
-  'Kiev',
-  'Lisbon',
-  'Ljubljana',
-  'London',
-  'Luxembourg',
-  'Madrid',
-  'Minsk',
-  'Monaco',
-  'Oslo',
-  'Paris',
-  'Podgorica',
-  'Prague',
-  'Reykjavik',
-  'Riga',
-  'Sarajevo',
-  'Skopje',
-  'Sofia',
-  'Stockholm',
-  'Tallinn',
-  'Tirana',
-  'Vienna',
-  'Vilnius',
-  'Warsaw',
-  'Zagreb',
-]
-
-// genereting password to guess
-function generatePassword() {
-  passwordText = Answers[Math.floor(Math.random() * Answers.length)].toUpperCase()
-  for (let i = 0; i < passwordText.length; i++) {
-    password.push('-')
-  }
-  console.log(password)
+function createNewAnswear(arr) {
+  const randomAnswear = arr?.[Math.floor(Math.random() * (arr?.length - 1))].toUpperCase()
+  answear = Array.from(randomAnswear)
+  password = answear.map((element) => {
+    return '-'
+  })
+  passwordHolder.innerText = password.join('')
 }
-generatePassword()
 
-// switching an image depending on failCounter Value
+// create a keyboard
+letters.forEach((item) => {
+  const newDiv = document.createElement('div')
+  newDiv.id = item.id
+  newDiv.innerText = item.name
+  newDiv.classList.add('key')
+  keyboard.appendChild(newDiv)
+  if (item?.name === 'P' || item?.name === 'L') {
+    const newBr = document.createElement('br')
+    keyboard.appendChild(newBr)
+  }
+})
+const keys = document.querySelectorAll('.key')
+
+// Main Logic
+
 function imgSwitch() {
-  switch (failCounter) {
-    case 1:
-      hangmanIcon.src = './resourcess/images/hang1.jpg'
-      break
-    case 2:
-      hangmanIcon.src = './resourcess/images/hang2.jpg'
-      break
-    case 3:
-      hangmanIcon.src = './resourcess/images/hang3.jpg'
-      break
-    case 4:
-      hangmanIcon.src = './resourcess/images/hang4.jpg'
-      break
-    case 5:
-      hangmanIcon.src = './resourcess/images/intro2.jpg'
-      break
+  if (failCounter === 0) return (hangmanIcon.src = './resourcess/images/hang0.jpg')
+  if (failCounter === 1) return (hangmanIcon.src = './resourcess/images/hang1.jpg')
+  if (failCounter === 2) return (hangmanIcon.src = './resourcess/images/hang2.jpg')
+  if (failCounter === 3) return (hangmanIcon.src = './resourcess/images/hang3.jpg')
+  if (failCounter === 4) return (hangmanIcon.src = './resourcess/images/hang4.jpg')
+  hangmanIcon.src = './resourcess/images/intro2.jpg'
+}
+
+const logic = (element) => {
+  const letter = element.innerText
+  console.log(answear)
+  console.log(password)
+
+  if (answear.indexOf(letter) > -1) {
+    for (let i = 0; i < answear.length; i++) {
+      answear[i] === letter ? (password[i] = letter) : null
+    }
+    passwordHolder.innerText = password.join('')
+  }
+
+  if (answear.indexOf(letter) === -1) {
+    sound.currentTime = 0
+    sound.play()
+    console.log(failCounter)
+    failCounter++
+    imgSwitch()
+  }
+
+  if (failCounter === 5) {
+    gameResolved = true
+    statusHolder.innerText = 'You Lose!'
+    switchScreen(playAgainBtn)
+  }
+
+  if (failCounter < 5 && answear.join('') === passwordHolder.innerText) {
+    gameResolved = true
+    statusHolder.innerText = 'You Win!'
+    switchScreen(playAgainBtn)
   }
 }
-// creating a virtual keyboard with handlebars
-const context = {
-  keys: [
-    {id: 'KeyQ', name: 'Q'},
-    {id: 'KeyW', name: 'W'},
-    {id: 'KeyE', name: 'E'},
-    {id: 'KeyR', name: 'R'},
-    {id: 'KeyT', name: 'T'},
-    {id: 'KeyY', name: 'Y'},
-    {id: 'KeyU', name: 'U'},
-    {id: 'KeyI', name: 'I'},
-    {id: 'KeyO', name: 'O'},
-    {id: 'KeyP', name: 'P', br: true},
-    {id: 'KeyA', name: 'A'},
-    {id: 'KeyS', name: 'S'},
-    {id: 'KeyD', name: 'D'},
-    {id: 'KeyF', name: 'F'},
-    {id: 'KeyG', name: 'G'},
-    {id: 'KeyH', name: 'H'},
-    {id: 'KeyJ', name: 'J'},
-    {id: 'KeyK', name: 'K'},
-    {id: 'KeyL', name: 'L', br: true},
-    {id: 'KeyZ', name: 'Z'},
-    {id: 'KeyX', name: 'X'},
-    {id: 'KeyC', name: 'C'},
-    {id: 'KeyV', name: 'V'},
-    {id: 'KeyB', name: 'B'},
-    {id: 'KeyN', name: 'N'},
-    {id: 'KeyM', name: 'M'},
-  ],
-}
-
-const templateElement = document.getElementById('templateKey')
-const templateSource = templateElement.innerHTML
-const template = Handlebars.compile(templateSource)
-const compiledHtml = template(context)
-document.getElementById('keyboard').innerHTML = compiledHtml
-
-function logic() {
-  let check = false
-  if (failCounter < 5) {
-    for (let i = 0; i < passwordText.length; i++) {
-      if ('Key' + passwordText[i] === event.code) {
-        let currentKey = event.key.toUpperCase()
-        password[i] = currentKey
-        passwordPlace.innerHTML = password.join('')
-        check = true
-      }
-    }
-    if (password.join('') === passwordText) {
-      buttonAgain.style.display = 'block'
-      alert('you won')
-      removeEventListener('keypress', hitKey)
-    }
-    if (!check && failCounter < 5) {
-      const sound = document.getElementById('failsound')
-      sound.currentTime = 0
-      sound.play()
-      failCounter++
-      imgSwitch()
-      if (failCounter === 5) {
-        buttonAgain.style.display = 'block'
-        alert('you lose')
-      }
-    }
+function hitKeys(element) {
+  if (element.style.backgroundColor !== 'rgba(0, 0, 0, 0.5)' && failCounter < 5 && gameResolved === false) {
+    element.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+    logic(element)
   }
 }
 
-function hitKey(event) {
-  if (failCounter < 5) {
-    let key = document.getElementById(event.code)
-    if (key && key.style.backgroundColor !== 'rgba(0, 0, 0, 0.5)') {
-      logic()
-      key.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-    }
-    if (key) {
-      key.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-    }
-  }
-}
-
-function reset() {
+const startGame = () => {
+  statusHolder.innerText = ''
+  createNewAnswear(answears)
   failCounter = 0
-  password = []
-  generatePassword()
-  for (let i = 0; i < document.getElementsByClassName('key').length; i++) {
-    document.getElementsByClassName('key')[i].style.backgroundColor = ''
+  keys.forEach((el) => (el.style.backgroundColor = ''))
+}
+// listener of clicking and hiting a key
+
+document.addEventListener('keypress', (event) => {
+  const regex = /([a-z])/gi
+  if (regex.test(event.key)) {
+    const key = document.getElementById(event.code)
+    hitKeys(key)
   }
-  StartGame()
-  buttonAgain.style.display = 'none'
-}
+})
 
-const StartGame = () => {
-  rightColumn.style.display = 'none'
-  right2Column.style.display = 'block'
-  hangmanIcon.src = './resourcess/images/hang0.jpg'
-  passwordPlace.innerHTML = password.join('')
-  document.addEventListener('keypress', hitKey)
-}
+keys.forEach((element) =>
+  element.addEventListener('click', (element) => {
+    hitKeys(element.target)
+  })
+)
 
-buttonAgain.onclick = function () {
-  reset()
-  StartGame
-}
-
-startButton.onclick = StartGame
+startGame()
+playAgainBtn.addEventListener('click', () => {
+  switchScreen(playAgainBtn)
+  startGame()
+  imgSwitch()
+  gameResolved = false
+})

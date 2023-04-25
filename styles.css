@@ -1,105 +1,126 @@
 @font-face {
-    font-family: 'gadugi';
-    src: url(./resourcess/fonts/gadugi.ttf);
-  }
+  font-family: 'gadugi';
+  src: url(./resourcess/fonts/gadugi.ttf);
+}
 
 html {
-    font-size: 18px;
-    font-family: 'gadugi';
-    color:rgb(255, 255, 255);
-    margin: 0px 0px;
+  font-size: 18px;
+  font-family: 'gadugi';
+  color: rgb(255, 255, 255);
+  margin: 0px 0px;
 }
 
 body {
-    background-color: #002851;
+  background-color: #002851;
 }
 
-#container {
-    margin: 10% auto;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
+.container {
+  margin: 10% auto;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
-#hangman {      
-   
-}
-#right {     
-    
+.container img {
+  width: clamp(200px, 400px, 500px);
+  transition: 0.3s ease-in-out;
 }
 
-#right2 {     
-    display: none;
+.welcome-screen {
+  text-align: left;
+}
+.playground {
+  display: flex;
+  justify-content: center;
 }
 
+.active {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
 
 h2 {
-    margin-top: 200px;
-    font-size: 3em;
-    line-height: 0%;
-    font-weight: bold;    
+  margin-top: 200px;
+  font-size: 3em;
+  line-height: 0%;
+  font-weight: bold;
 }
 
 h4 {
-    font-size: 1em;
-    text-align: right;
+  font-size: 1em;
+  text-align: right;
 }
 
-#play-button {
-    
-    width: 120px;    
-    height: 50px;   
-    border-radius: 5px;
-    border: 1px solid rgb(226, 226, 226);
-    cursor: pointer;
-    
-   
+.play-button {
+  padding: 12px 40px;
+  border-radius: 8px;
+  border: 2px solid rgb(226, 226, 226);
+  background: transparent;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
 }
 
-#play-button:hover{
-    background-color: rgb(255, 255, 255,0.5);       
+.play-button:hover {
+  background-color: rgb(255, 255, 255, 0.5);
 }
 
-.text-button{   
-    margin: auto;
-    font-size: 24px;
-    text-align: center;
-    line-height: 50px;
-    
-}
 #password {
-    margin-top: 150px;
-    font-size: 4em;
+  margin-top: 150px;
+  font-size: 4em;
+}
+
+#keyboard {
+  margin: 10px 0px 50px 0px;
+  min-width: clamp(300px, 400px, 600px);
+}
+
+p {
+  margin: 0 auto;
+  max-width: 80vw;
+  text-align: center;
 }
 
 .key {
-    width:40px;
-    height: 40px;
-    margin: 2px;
-    padding: 5px;
-    background-color: rgb(230, 2300, 230,0);
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(255, 255, 255);
-    display: inline-block;
+  width: clamp(25px, 40px, 50px);
+  height: 40px;
+  margin: 3px;
+  padding: 5px;
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: #002851;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-.singleKey {
-    font-size: 24px;
+.key:hover {
+  background-color: rgb(255, 255, 255, 0.5);
 }
 
-#keyboard{
-    margin-top: 50px;
-    text-align: center;
+.play-again {
+  margin: 15px auto;
+  padding: 12px 40px;
+  border-radius: 8px;
+  border: 2px solid rgb(226, 226, 226);
+  background: transparent;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
 }
 
-#playAgain {
-    margin-top: 50px;
-    display: none;
-    width:220px;
-    height: 50px;    
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(255, 255, 255);
-    cursor: pointer;
+.play-again:hover {
+  background-color: rgb(255, 255, 255, 0.5);
 }
